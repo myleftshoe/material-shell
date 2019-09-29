@@ -1,5 +1,7 @@
 const Main = imports.ui.main;
 const { St } = imports.gi;
+const Tweener = imports.ui.tweener;
+const { Clutter } = imports.gi;
 
 /* exported PanelToLeftSubModule */
 var PanelToLeftSubModule = class PanelToLeftSubModule {
@@ -29,8 +31,40 @@ var PanelToLeftSubModule = class PanelToLeftSubModule {
         this.panelBox.set_height(this.primaryMonitor.height);
         this.dashSpacer.set_height(Main.overview._controls._group.height);
         this.panel.set_height(this.primaryMonitor.height);
+
+
+        // Tweener.addTween(this.taskActiveIndicator, {
+        //     x: taskBarItem.x,
+        //     width: taskBarItem.width,
+        //     time: 0.25,
+        //     transition: 'easeOutQuad'
+        // });
+
+
+        this.panel.connect('event', (actor, event) => {
+            let eventType = event.type();
+            log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+            if (event.type() === Clutter.EventType.LEAVE) { 
+                let [_, x, y] = [...event.get_coords()];
+                Tweener.addTween(this.panelBox, {
+                    x: -this.panel.get_width() + 1,
+                    time: 0,
+                    transition: 'easeOutQuad',
+                });
+            }
+            if (event.type() === Clutter.EventType.ENTER) { 
+                let [_, x, y] = [...event.get_coords()];
+                Tweener.addTween(this.panelBox, {
+                    x: 0,
+                    time: 0,
+                    transition: 'easeOutQuad',
+                });
+            }
+        });
+
+
         this.panelBox.set_position(
-            this.primaryMonitor.x,
+            this.primaryMonitor.x, //- this.panel.get_height(),
             this.primaryMonitor.y
         );
 

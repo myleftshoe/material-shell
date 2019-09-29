@@ -48,6 +48,9 @@ var LeftPanelModule = class LeftPanelModule {
         this.subModules.forEach(subModule => {
             subModule.enable();
         });
+        // this.panel.set_height(0);
+        // this.panel.hide();
+        // this.panel.show();
     }
 
     disable() {
