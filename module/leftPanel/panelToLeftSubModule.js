@@ -43,20 +43,27 @@ var PanelToLeftSubModule = class PanelToLeftSubModule {
 
         this.panel.connect('event', (actor, event) => {
             let eventType = event.type();
-            log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+            const workspaceButtonsContainer =  this.panel._leftBox.get_child_at_index(2);
+            const workspaceButtonBox =  workspaceButtonsContainer.first_child;
+            const indicator = workspaceButtonsContainer.get_child_at_index(1);
             if (event.type() === Clutter.EventType.LEAVE) { 
+                indicator.opacity = 0;
                 let [_, x, y] = [...event.get_coords()];
-                Tweener.addTween(this.panelBox, {
-                    x: -this.panel.get_width() + 1,
-                    time: 0,
+                Tweener.addTween(workspaceButtonBox, {
+                    x: -this.panel.get_width(),
+                    // opacity:50,
+                    // delay: 2,
+                    time: .2,
                     transition: 'easeOutQuad',
                 });
             }
             if (event.type() === Clutter.EventType.ENTER) { 
+                indicator.opacity = 255;
                 let [_, x, y] = [...event.get_coords()];
-                Tweener.addTween(this.panelBox, {
+                Tweener.addTween(workspaceButtonBox, {
                     x: 0,
-                    time: 0,
+                    // opacity:255,
+                    time: .2,
                     transition: 'easeOutQuad',
                 });
             }
