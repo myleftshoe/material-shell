@@ -33,26 +33,24 @@ var PanelToLeftSubModule = class PanelToLeftSubModule {
         this.panel.set_height(this.primaryMonitor.height);
 
 
-        // Tweener.addTween(this.taskActiveIndicator, {
-        //     x: taskBarItem.x,
-        //     width: taskBarItem.width,
-        //     time: 0.25,
-        //     transition: 'easeOutQuad'
-        // });
-
-
         this.panel.connect('event', (actor, event) => {
             let eventType = event.type();
             const workspaceButtonsContainer =  this.panel._leftBox.get_child_at_index(2);
             const workspaceButtonBox =  workspaceButtonsContainer.first_child;
             const indicator = workspaceButtonsContainer.get_child_at_index(1);
             if (event.type() === Clutter.EventType.LEAVE) { 
-                indicator.opacity = 0;
+                // indicator.opacity = 0;
                 let [_, x, y] = [...event.get_coords()];
+                Tweener.addTween(indicator, {
+                    opacity:0,
+                    delay: 1,
+                    time: 0,
+                    transition: 'easeOutQuad',
+                });                
                 Tweener.addTween(workspaceButtonBox, {
                     x: -this.panel.get_width(),
                     // opacity:50,
-                    // delay: 2,
+                    delay: 1,
                     time: .2,
                     transition: 'easeOutQuad',
                 });
