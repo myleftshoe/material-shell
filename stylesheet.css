@@ -135,6 +135,10 @@
   margin: 0px;
 }
 
+.panel-button:active, .panel-button:focus, .panel-button:checked {
+  box-shadow: inset 3px 0 0px #3f51b5;
+}
+
 .system-status-icon {
   height: 24px;
   width: 24px;

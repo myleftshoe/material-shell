@@ -153,6 +153,10 @@ $badge-color-fg: black;
     }
 }
 
+.panel-button:active, .panel-button:focus, .panel-button:checked {
+    box-shadow: inset 3px 0 0px $color-primary;
+}
+
 .system-status-icon {
     height: 24px;
     width: 24px;
