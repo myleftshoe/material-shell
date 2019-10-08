@@ -9,27 +9,27 @@ var RectangularClockSubModule = class RectangularClockSubModule {
 
     enable() {
         this.dateMenu._clock.time_only = true;
-        this.indicatorPad = (ShellVersionMatch('3.32')
-            ? this.dateMenu.actor
-            : this.dateMenu
-        )
-            .get_child_at_index(0)
-            .get_child_at_index(0);
-        this.indicatorPad.hide();
-        this.removeDotsFromClock();
-        this.connectSignal = this.dateMenu._clock.connect(
-            'notify::clock',
-            () => {
-                this.removeDotsFromClock();
-            }
-        );
+        // this.indicatorPad = (ShellVersionMatch('3.32')
+        //     ? this.dateMenu.actor
+        //     : this.dateMenu
+        // )
+        //     .get_child_at_index(0)
+        //     .get_child_at_index(0);
+        // this.indicatorPad.hide();
+        // this.removeDotsFromClock();
+        // this.connectSignal = this.dateMenu._clock.connect(
+        //     'notify::clock',
+        //     () => {
+        //         this.removeDotsFromClock();
+        //     }
+        // );
     }
 
     disable() {
         this.dateMenu._clock.time_only = false;
-        this.dateMenu._clock.disconnect(this.connectSignal);
-        this.dateMenu._clockDisplay.text = this.dateMenu._clock.clock;
-        this.indicatorPad.show();
+        // this.dateMenu._clock.disconnect(this.connectSignal);
+        // this.dateMenu._clockDisplay.text = this.dateMenu._clock.clock;
+        // this.indicatorPad.show();
     }
 
     removeDotsFromClock() {
